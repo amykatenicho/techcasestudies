@@ -85,7 +85,7 @@ Also during the Ascend+ project we created a set of web service HTTP requests in
 
 Overall Architecture
 
-![Final Architecture of Solution](/images/2016-12-14-Hogarth-Zonza-PBIE/architecture_hogarth_pbie.png)
+![Final Architecture of Solution](/images/2016-12-14-Hogarth-Zonza-PBIE/architecture_hogarth_pbie.PNG)
 
 ![A working architecture and progress during the hackathon](/images/2016-12-14-Hogarth-Zonza-PBIE/working1.png)
 
