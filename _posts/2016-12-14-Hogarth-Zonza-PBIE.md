@@ -154,12 +154,42 @@ def generate_token(access_key, workspace_id, report_id, workspace_collection):
 
 ```
 
-    * REST functions to add/edit/delete and update settings/functionality in the Power BI Embedded Workspace Collection - used mainly within the admin application
-        * ![Sample Python Code for Power BI Embedded REST Implementation](/images/2016-12-14-Hogarth-Zonza-PBIE/pbie_rest.PNG)
+* REST functions to add/edit/delete and update settings/functionality in the Power BI Embedded Workspace Collection - used mainly within the admin application
+    * ![Sample Python Code for Power BI Embedded REST Implementation](/images/2016-12-14-Hogarth-Zonza-PBIE/pbie_rest.PNG)
 * First step was to complete a manual run through of creation of Power BI Embedded workspace collection/workspaces/PBIX Upload and Token Generation to display a sample report in a POC application
     * ![Power BI Embedded Azure Portal UI](/images/2016-12-14-Hogarth-Zonza-PBIE/azureportal_pbie.PNG)
 * Setup the use of Direct Query with Azure SQL DB - updating the credentials for the report datasource so data can be displayed. This used the Power BI Embedded REST API functionality
-    * ![Sample Direct Query Connection Code](/images/2016-12-14-Hogarth-Zonza-PBIE/directquery_connection_code.PNG)
+
+```Python
+class Gateway(object):
+    def __init__(self, import_, gateway_id, datasource_id):
+        self.import_ = import_
+        self.gateway_id = gateway_id
+        self.datasource_id = datasource_id
+        self.session = import_.session
+        path = 'gateways/{}/datasources/{}'.format(
+            gateway_id,
+            datasource_id)
+        self.url = urljoin(import_.workspace.url, path)
+
+    def __repr__(self):
+        return 'Gateway(import_={!r}, gateway_id={!r}, datasource_id={!r})'.format(
+            self.import_, self.gateway_id, self.datasource_id)
+
+    def update_connection_string(self, username, password):
+        db_creds = {
+            "credentialType": "Basic",
+            "basicCredentials": {
+                "username": username,
+                "password": password,
+            }
+        }
+        res = self.session.patch(self.url, json=db_creds)
+        log_http('PATCH', self.url, res)
+        res.raise_for_status()
+
+```
+
 * Created an 'Insights' tab in a dev instance of Hogarth's application (Zonza) and embedded a report in an IFRAME
 * Experimented with the Javascript API for Embedded and the events recorded, for example using the _dataSelected_ functionality in Javascript to retrieve JSON values about what visual has been selected and the data contained.
     * A brilliant [demo of the Javascript APIs](https://microsoft.github.io/PowerBI-JavaScript/demo/code-demo/index.html#) from the Power BI Embedded team. This resource helped the team experiment quickly with the possible capabilities.
@@ -176,10 +206,10 @@ __Learnings:__
 * The architecture decsions around where to split into Workspace Collections or workspaces for customers were domain/customer specific. This can depend on global regions needed, customer data segmentation and multi-tenancy
 
 __Feedback/Further Investigation__
-* The parity between sample SDK C# example abilities and REST Documentation is not the same, some functions in the SDK code that are called are not documented in the REST API, example you delete a dataset in the C# SDK but the documentation for REST APIs does not say this
-* Need to investigate further the reasoning for not being able to deleted a workspace
-* It would be useful to be able to set the display name of the workspace to something human readable, or send some JSON after creation to edit the display name of a workspace so its easier to reference from the admin side
-* Further investigation needed, the Data selected JavaScript APIs doesn't seem to support the table visual to select a piece of data in the table and show an asset below or navigate to a page in the application
-
+The Microsoft and Hogarth team found feedback that has been provided back t the Power BI Embedded team, as well as areas to make further investigation into such as the partiy between REST APIs and SDK as well as the abilities of the new Javascript API for Event Operation _dataSelected_
+We also found when designing the solution that it would be useful to be able to set the display name of the workspace to something human readable, or send some JSON after creation to edit the display name of a workspace so that it is easier to reference from the admin site when needed.
 
 # Conclusion #
+In conclusion, the two day hackathon was a success. We achieved the goal of embedding a Power BI file into the Hogarth Zonza application using a JWT, as well as so much more around the programmatic access to resources using the Power BI Embedded REST APIs as well as interaction in and out of the report using the new Javascript Embedded APIs.
+
+The whole team gained valuable knowledge about Power BI Embedded and the wider Azure services and this should allow Hogarth to continue this project into production.
