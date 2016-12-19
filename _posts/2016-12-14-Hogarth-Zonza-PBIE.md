@@ -83,16 +83,16 @@ Also during the Ascend+ project we created a set of web service HTTP requests in
 ## The Data Pipeline/Overall Architecture ##
 The data architecture below shows not only the Power BI Embedded service and the front end application but the whole data cycle from exporting the Zonza application data to an Azure SQL Database through to calling the Python REST functions in customer and admin cases.
 
-__Customer Architecture__
+## Customer Architecture ##
 
 ![Final Customer Architecture of Solution](/images/2016-12-14-Hogarth-Zonza-PBIE/customer_experience.PNG)
 
-__Admin Architecture__
+## Admin Architecture ##
 
 ![Final Admin Architecture of Solution](/images/2016-12-14-Hogarth-Zonza-PBIE/admin_experience.PNG)
 
 
-__Architecture in Progress during the hack__
+## Architecture in Progress during the hack ##
 
 ![A working architecture and progress during the hackathon](/images/2016-12-14-Hogarth-Zonza-PBIE/working1.png)
 
