@@ -2,12 +2,11 @@
 layout: post
 title:  "Power BI Embedded Integration with Hogarth (WPP)"
 author: "Amy Nicholson"
-author-link: "#"
-#author-image: "{{ site.baseurl }}/images/authors/AmyKateNicho.jpg"
+author-link: "https://twitter.com/AmyKateNicho"
+author-image: "/images/authors/AmyKateNicho.png"
 date:   2016-12-16
 categories: [Power BI Embedded]
 color: "blue"
-#image: "{{ site.baseurl }}/images/imagename.png" #should be ~350px tall
 excerpt: This article details the end to end process of embedding reports using Power BI Embedded into the Hogarth(WPP) Zonza application.
 language: The language of the article (e.g.: [English])
 verticals: The vertical markets this article has focus on (e.g.: [“Retail, Consumer Products & Services”, Communications/Media])
@@ -86,9 +85,9 @@ Also during the Ascend+ project we created a set of web service HTTP requests in
 
 Overall Architecture
 
-![Final Architecture of Solution]({{ site.baseurl }}/images/2016-12-14-Hogarth-Zonza-PBIE/architecture_hogarth_pbie.PNG)
+![Final Architecture of Solution](/images/2016-12-14-Hogarth-Zonza-PBIE/architecture_hogarth_pbie.png)
 
-![A working architecture and progress during the hackathon]({{ site.baseurl }}/images/2016-12-14-Hogarth-Zonza-PBIE/working1.jpg)
+![A working architecture and progress during the hackathon](/images/2016-12-14-Hogarth-Zonza-PBIE/working1.png)
 
 Customer Journey through architecture
 1. Customer logs into Zonza application with normal Zonza credentials
