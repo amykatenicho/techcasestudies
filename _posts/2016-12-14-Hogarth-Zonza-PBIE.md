@@ -89,7 +89,8 @@ Overall Architecture
 
 ![A working architecture and progress during the hackathon](/images/2016-12-14-Hogarth-Zonza-PBIE/working1.png)
 
-Customer Journey through architecture
+Customer Journey through Architecture:
+
 1. Customer logs into Zonza application with normal Zonza credentials
 2. Customer clicks on the 'Insights' tab
 3. This makes a request to the Python Token Service to generate a JWT
@@ -97,7 +98,8 @@ Customer Journey through architecture
 5. If accepted the PBIX file uploaded to the Power BI Embedded Workspace is displayed in the Zonza application Insights tab
 6. The data contained in the report displayed in Zonza is always up to date, as Direct Query functionality to an Azure SQL DB is setup through the REST APIs
 
-Admin Super User Journey
+Admin Super User Journey through Architecture: 
+
 1. Log into the Zonza Admin application
 2. Upload a new PBIX file via a form upload
 3. Upload calls into python functions created to programmatically call the REST APIs and create/upload the (binary) PBIX file to a selected Power BI Embedded Workspace collection and Workspace
