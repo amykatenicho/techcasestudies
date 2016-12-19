@@ -2,7 +2,7 @@
 layout: post
 title:  "Power BI Embedded with Hogarth(WPP)"
 author: "Amy Nicholson"
-author-link: "#"
+author-link: "https://twitter.com/AmyKateNicho"
 author-image: "/images/authors/AmyKateNicho.jpg"
 date:   12-16-2016
 categories: Power BI Embedded
@@ -100,34 +100,67 @@ The data architecture below shows not only the Power BI Embedded service and the
 
 __Customer Journey through Architecture:__
 
-1. Customer logs into Zonza application with normal Zonza credentials
+1. Customer logs into Zonza application with Zonza credentials
 2. Customer clicks on the 'Insights' tab
-3. This makes a request to the Python Token Service to generate a JWT
+3. This makes a request to the Python Token Service to generate a JWT (JSON Web Token)
 4. Once created the JWT is passed to a Power BI Embedded service in Azure where the token is accepted/declined
-5. If accepted the PBIX file uploaded to the Power BI Embedded Workspace is displayed in the Zonza application Insights tab
-6. The data contained in the report displayed in Zonza is always up to date, as Direct Query functionality to an Azure SQL DB is setup through the REST APIs
+5. If accepted, the PBIX file uploaded to the Power BI Embedded Workspace is displayed in the Zonza application Insights tab
+6. The data contained in the report displayed in Zonza is always up to date, as Direct Query functionality to an Azure SQL Database is setup through the REST APIs
 
 __Admin Super User Journey through Architecture:__
 
 1. Log into the Zonza Admin application
 2. Upload a new PBIX file via a form upload
-3. Upload calls into python functions created to programmatically call the REST APIs and create/upload the (binary) PBIX file to a selected Power BI Embedded Workspace collection and Workspace
+3. Upload calls into Python functions, created to programmatically call the REST APIs and create/upload the (binary) PBIX file to a selected Power BI Embedded Workspace collection/Workspace
 
 
 ## Technical details of Implementation ##
 
 * PBIX files created to show the capabilities of cross filtering and charting visuals over tables
-* Power BI Embedded REST APIs used to create a Python Token Service and Python admin function calls 
-    * A JWT is created in token service that completes the handshake with Azure
-        * ![Sample Python Code for Generating a JSON Web Token](/images/2016-12-14-Hogarth-Zonza-PBIE/generate_token.PNG)
-    * REST functions to add/edit/delete and update settings/functionality in the Power BI Embedded workspace collection - used mainly within the admin application
+* Power BI Embedded REST APIs were used to create a Python Token Service and Python Admin function calls 
+    * A JWT is created in the token service that completes the secure handshake with Azure Power BI Embedded service
+    
+    '''Python
+    import time
+
+    import jwt
+
+
+    # https://docs.microsoft.com/en-us/azure/power-bi-embedded/power-bi-embedded-app-token-flow
+    def generate_token(access_key, workspace_id, report_id, workspace_collection):
+        """Generate JWT token."""
+        # token times
+        start = time.time()
+        end = start + 60 * 60
+
+        # create tokens
+        headers = {
+            "typ": "JWT",
+            "alg": "HS256",
+        }
+
+        payload = {
+            "wid": workspace_id,
+            "rid": report_id,
+            "wcn": workspace_collection,
+            "iss": "PowerBISDK",
+            "ver": "0.2.0",
+            "aud": "https://analysis.windows.net/powerbi/api",
+            "nbf": start,
+            "exp": end,
+        }
+
+        return jwt.encode(key=access_key, headers=headers, payload=payload)
+    '''
+
+    * REST functions to add/edit/delete and update settings/functionality in the Power BI Embedded Workspace Collection - used mainly within the admin application
         * ![Sample Python Code for Power BI Embedded REST Implementation](/images/2016-12-14-Hogarth-Zonza-PBIE/pbie_rest.PNG)
-* Completed first a manual run through of creation of PBIE workspace collection/workspaces/PBIX Upload and Token Generation to display a sample report in a POC application (show/educate the Hogarth team on the flow)
+* First step was to complete a manual run through of creation of Power BI Embedded workspace collection/workspaces/PBIX Upload and Token Generation to display a sample report in a POC application
     * ![Power BI Embedded Azure Portal UI](/images/2016-12-14-Hogarth-Zonza-PBIE/azureportal_pbie.PNG)
-* Setup use of Direct Query with Azure SQL DB - updating the credentials for report to be displayed using the REST API functionality
+* Setup the use of Direct Query with Azure SQL DB - updating the credentials for the report datasource so data can be displayed. This used the Power BI Embedded REST API functionality
     * ![Sample Direct Query Connection Code](/images/2016-12-14-Hogarth-Zonza-PBIE/directquery_connection_code.PNG)
-* Created an insights tab in an instance of Hogarth's dev application for Zonza and embedded a report in an IFRAME
-* Experimented with the Javascript API for Embedded and the events recorded, for example using the dataSelected functionality in Javascript to retrieve JSON values 
+* Created an 'Insights' tab in a dev instance of Hogarth's application (Zonza) and embedded a report in an IFRAME
+* Experimented with the Javascript API for Embedded and the events recorded, for example using the _dataSelected_ functionality in Javascript to retrieve JSON values about what visual has been selected and the data contained.
     * A brilliant [demo of the Javascript APIs](https://microsoft.github.io/PowerBI-JavaScript/demo/code-demo/index.html#) from the Power BI Embedded team. This resource helped the team experiment quickly with the possible capabilities.
 
 [Placeholder for Video]
