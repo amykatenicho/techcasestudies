@@ -80,7 +80,7 @@ We also explored the Power BI Javascript APIs for interaction in and out of the 
 
 Also during the Ascend+ project we created a set of web service HTTP requests in python that will programmatically take care of the setup and calling of the Power BI Embedded service. This will be called from not only the cutsomer application but also the team/hack focused on the 'Admin Power User' who will want to create and upload PBIX files they have created in Power BI Desktop to be displayed in the end user application. This was all written in Python using the REST APIs
 
-`![Final outcome: Power BI Embedded implemented into Zonza Application](../images/2016-12-14-Hogarth-Zonza-PBIE/final-outcome.png)`
+![Final outcome: Power BI Embedded implemented into Zonza Application](../images/2016-12-14-Hogarth-Zonza-PBIE/final-outcome.png)
  
 ## The data pipeline architecture, details, challenges/workarounds, and the overall architecture. ##
 
