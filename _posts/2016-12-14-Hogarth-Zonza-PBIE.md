@@ -120,38 +120,39 @@ __Admin Super User Journey through Architecture:__
 * Power BI Embedded REST APIs were used to create a Python Token Service and Python Admin function calls 
     * A JWT is created in the token service that completes the secure handshake with Azure Power BI Embedded service
     
-    '''Python
-    import time
+```Python
+import time
 
-    import jwt
+import jwt
 
 
-    # https://docs.microsoft.com/en-us/azure/power-bi-embedded/power-bi-embedded-app-token-flow
-    def generate_token(access_key, workspace_id, report_id, workspace_collection):
-        """Generate JWT token."""
-        # token times
-        start = time.time()
-        end = start + 60 * 60
+# https://docs.microsoft.com/en-us/azure/power-bi-embedded/power-bi-embedded-app-token-flow
+def generate_token(access_key, workspace_id, report_id, workspace_collection):
+    """Generate JWT token."""
+    # token times
+    start = time.time()
+    end = start + 60 * 60
 
-        # create tokens
-        headers = {
-            "typ": "JWT",
-            "alg": "HS256",
-        }
+    # create tokens
+    headers = {
+        "typ": "JWT",
+        "alg": "HS256",
+    }
 
-        payload = {
-            "wid": workspace_id,
-            "rid": report_id,
-            "wcn": workspace_collection,
-            "iss": "PowerBISDK",
-            "ver": "0.2.0",
-            "aud": "https://analysis.windows.net/powerbi/api",
-            "nbf": start,
-            "exp": end,
-        }
+    payload = {
+        "wid": workspace_id,
+        "rid": report_id,
+        "wcn": workspace_collection,
+        "iss": "PowerBISDK",
+        "ver": "0.2.0",
+        "aud": "https://analysis.windows.net/powerbi/api",
+        "nbf": start,
+        "exp": end,
+    }
 
-        return jwt.encode(key=access_key, headers=headers, payload=payload)
-    '''
+    return jwt.encode(key=access_key, headers=headers, payload=payload)
+
+```
 
     * REST functions to add/edit/delete and update settings/functionality in the Power BI Embedded Workspace Collection - used mainly within the admin application
         * ![Sample Python Code for Power BI Embedded REST Implementation](/images/2016-12-14-Hogarth-Zonza-PBIE/pbie_rest.PNG)
