@@ -109,14 +109,19 @@ Admin Super User Journey through Architecture:
 
 * PBIX files created to show the capabilities of cross filtering and charting visuals over tables
 * Power BI Embedded REST APIs used to create a Python Token Service and Python admin function calls 
-    * A JWT is created in token service that completes the handshake with Azure (sample code to share here: need to confirm with hogarth first)
+    * A JWT is created in token service that completes the handshake with Azure
+        * ![Sample Python Code for Generating a JSON Web Token](/images/2016-12-14-Hogarth-Zonza-PBIE/generate_token.png)
     * REST functions to add/edit/delete and update settings/functionality in the Power BI Embedded workspace collection - used mainly within the admin application
+        * ![Sample Python Code for Power BI Embedded REST Implementation](/images/2016-12-14-Hogarth-Zonza-PBIE/pbie_rest.PNG)
 * Completed first a manual run through of creation of PBIE workspace collection/workspaces/PBIX Upload and Token Generation to display a sample report in a POC application (show/educate the Hogarth team on the flow)
+    * ![Power BI Embedded Azure Portal UI](/images/2016-12-14-Hogarth-Zonza-PBIE/azureportal_pbie.PNG)
 * Setup use of Direct Query with Azure SQL DB - updating the credentials for report to be displayed using the REST API functionality
+    * ![Sample Direct Query Connection Code](/images/2016-12-14-Hogarth-Zonza-PBIE/directquery_connection_code.PNG)
 * Created an insights tab in an instance of Hogarth's dev application for Zonza and embedded a report in an IFRAME
 * Experimented with the Javascript API for Embedded and the events recorded, for example using the dataSelected functionality in Javascript to retrieve JSON values 
+    * A brilliant [demo of the Javascript APIs](https://microsoft.github.io/PowerBI-JavaScript/demo/code-demo/index.html#) from the Power BI Embedded team. This resource helped the team experiment quickly with the possible capabilities.
 
-_gaining a demo video from the cutsomer of solution_
+[Placeholder for Video]
 
 ## Pointers to references or documentation. ##
 
