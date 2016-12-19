@@ -1,15 +1,16 @@
 ---
 layout: post
-title:  "Power BI Embedded Integration with Hogarth (WPP)"
+title:  "Power BI Embedded with Hogarth(WPP)"
 author: "Amy Nicholson"
-author-link: [https://twitter.com/AmyKateNicho](https://twitter.com/AmyKateNicho)
-author-image: "/images/authors/AmyKateNicho.png"
-date:   2016-12-16
-categories: [Power BI Embedded]
+author-link: "#"
+author-image: "/images/authors/AmyKateNicho.jpg"
+date:   12-16-2016
+categories: Power BI Embedded
 color: "blue"
-excerpt: This article details the end to end process of embedding reports using Power BI Embedded into the Hogarth(WPP) Zonza application.
-language: [English]
-verticals: [“Retail, Consumer Products & Services”, Communications/Media]
+#image: "{{ site.baseurl }}/images/Amadeus-Logo.png" #should be ~350px tall
+excerpt: Microsoft teamed up with Hogarth(WPP) in December 2016 to help them build out a Proof of Concept with Power BI Embedded inside their Zonza Data Assest Management Application.
+verticals: Retail, Consumer Products & Services
+language: English
 ---
 
 
