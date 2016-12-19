@@ -12,6 +12,7 @@ language: [English]
 verticals: [“Retail, Consumer Products & Services”, Communications/Media]
 ---
 
+
 # Power BI Embedded: Hogarth (WPP) & Microsoft
 
 # Overview #
