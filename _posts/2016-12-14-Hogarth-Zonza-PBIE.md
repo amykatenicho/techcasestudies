@@ -195,17 +195,16 @@ class Gateway(object):
     * A brilliant [demo of the Javascript APIs](https://microsoft.github.io/PowerBI-JavaScript/demo/code-demo/index.html#) from the Power BI Embedded team. This resource helped the team experiment quickly with the possible capabilities.
 
 [Placeholder for Video]
-
-## Pointers to references or documentation ##
-
  
 ## Learnings from Microsoft and Hogarth team ##
 
 __Learnings:__
+
 * By walking through in detail the creation of tokens and embeding of the reports through the REST API sample, meant that it was easier to understand the flow of the system and all steps that need to be completed. This is compared to say the SDK which does lots of functionality for you
 * The architecture decsions around where to split into Workspace Collections or workspaces for customers were domain/customer specific. This can depend on global regions needed, customer data segmentation and multi-tenancy
 
-__Feedback/Further Investigation__
+__Feedback/Further Investigation:__
+
 The Microsoft and Hogarth team found feedback that has been provided back t the Power BI Embedded team, as well as areas to make further investigation into such as the partiy between REST APIs and SDK as well as the abilities of the new Javascript API for Event Operation _dataSelected_
 We also found when designing the solution that it would be useful to be able to set the display name of the workspace to something human readable, or send some JSON after creation to edit the display name of a workspace so that it is easier to reference from the admin site when needed.
 
