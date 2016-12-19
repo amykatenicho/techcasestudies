@@ -2,20 +2,20 @@
 layout: post
 title:  "Power BI Embedded Integration with Hogarth (WPP)"
 author: "Amy Nicholson"
-author-link: "https://twitter.com/AmyKateNicho"
+author-link: [https://twitter.com/AmyKateNicho](https://twitter.com/AmyKateNicho)
 author-image: "/images/authors/AmyKateNicho.png"
 date:   2016-12-16
 categories: [Power BI Embedded]
 color: "blue"
 excerpt: This article details the end to end process of embedding reports using Power BI Embedded into the Hogarth(WPP) Zonza application.
-language: The language of the article (e.g.: [English])
-verticals: The vertical markets this article has focus on (e.g.: [“Retail, Consumer Products & Services”, Communications/Media])
+language: [English]
+verticals: [“Retail, Consumer Products & Services”, Communications/Media]
 ---
 
 # Power BI Embedded: Hogarth (WPP) & Microsoft
 
 # Overview #
-A growing requirement for Hogarth’s customers was to have more information and insights about the assets they store on Zonza: Data Assest Management platform. As Hogarth has a typical ISV engagement model, Power BI Embedded felt like the perfect solution for embedding data insights into the application they currently provide for their customers. We designed an architecture and implemented a solution where Hogarth produces Power BI (PBIX) reports for a cutsomers data, connects to them via direct query to an Azure SQL Database and pushes the PBIX files into the cloud in a Power BI Workspace Collection. Inside their python application we used the Power BI Embedded REST APIs to create a JSON Web Token (JWT) and embed an IFRAME that displays the Power BI Reports inside an 'Insights' tab in their Zonza application.
+A growing requirement for Hogarth’s customers was to have more information and insights about the assets they store on Zonza: Data Assest Management platform. As Hogarth has a typical ISV engagement model, Power BI Embedded felt like the perfect solution for embedding data insights into the application they currently provide for their customers. We designed an architecture, and implemented a solution, where Hogarth produces Power BI (PBIX) reports for a customers data, connects them; via direct query; to an Azure SQL Database and pushes the PBIX files into the cloud in a Power BI Embedded Workspace Collection. Inside their Python application, we used the Power BI Embedded REST APIs to create a JSON Web Token (JWT) and embed an IFRAME that displays the Power BI Reports inside an 'Insights' tab in their Zonza application.
 
 ## Key Technologies Used ##
 * [Power BI Embedded](https://azure.microsoft.com/en-us/services/power-bi-embedded/)
@@ -70,20 +70,27 @@ A growing requirement for Hogarth’s customers was to have more information and
 
 ## What we worked on and what problems this helped solve ##
 
-The main aim of the Ascend+ experinece was to take one of Hogarths cutsomer datasets and be able to embed a report into their Zonza application using Power BI Embedded. Their application is written in Python and so we used the REST APIs for Power BI Embedded instead of the SDKs to create a Python token service (JWT creation) and then passed the token to a workspace collection in Azure to call a PBIX file and display it in an insigts tab of their application. This is a great showcase of using the REST API to embed reports into any application, no matter the programming language.
+The main aim of the Ascend+ experience was to take one of Hogarths cutsomer datasets and be able to embed a report into their Zonza application using Power BI Embedded. Their application is written in Python, so the obvious choice was to use the REST APIs for Power BI Embedded instead of the SDKs. The APIs were used to create a Python token service (JWT creation) and then pass on that token to a workspace collection in Azure to call a PBIX file and display it in an 'Insights' tab of their application. This is a great showcase of using the REST API's to embed reports into any application, no matter the programming language.
 
-The PBIX file contained a report that displays visuals to the user for them to understand more about their asset data within the management system and when assets might be about to expire. This will solve the problem of mis-using assets.
+The PBIX file contained a report displaying visuals to the user, leading them to understand/investigate information about their asset data held within the data management system. The main data point to solve the problem stated above, is to show when assets might be about to expire.
 
-We also explored the Power BI Javascript APIs for interaction in and out of the IFRAME in the Zonza application. This will allow the cutsomer to filter the report down to a few items and then be able to click them, recieve the JSON back from the dataSelected event and push this to a call to their database. Once called the user will be taken to the page in the application containing that assest to investigate further. Unfortunately we ran into an issue where an item in a table cannot be selected and an event returned from the API (need to sync up with the engineering team further on this), however we had an example of retrieving data from a bar chart JSON in a sample application
+We also explored the Power BI Javascript APIs, for interaction in and out of the IFRAME in the Zonza application. This will allow the customer to filter the report down to a few items and then be able to click them, recieve the JSON request back from the _dataSelected_ event and push this information to their database and retrieve the URL for the chosen asset. Once selected the user will be taken to the page in the application containing that assest to investigate further. Unfortunately we ran into an issue where an item in a table cannot be selected and an event returned from the API, however we created an example of retrieving data from a bar chart in a sample application to show the possibilities.
 
-Also during the Ascend+ project we created a set of web service HTTP requests in python that will programmatically take care of the setup and calling of the Power BI Embedded service. This will be called from not only the cutsomer application but also the team/hack focused on the 'Admin Power User' who will want to create and upload PBIX files they have created in Power BI Desktop to be displayed in the end user application. This was all written in Python using the REST APIs
+Also during the Ascend+ project we created a set of web service HTTP requests in Python that will programmatically take care of the setup and requests of the Power BI Embedded service. This will be called from not only the cutsomer application but also the team focused on the 'Admin Power User' who will want to create and upload PBIX files they have created in Power BI Desktop to be displayed in the end user application. All the REST calls were made in Python using the Power BI Embedded REST APIs
 
 ![Final Outcome: Power BI Embedded implemented into Zonza Application](/images/2016-12-14-Hogarth-Zonza-PBIE/final-outcome.png)
  
 ## The Data Pipeline/Overall Architecture ##
+The data architecture below shows not only the Power BI Embedded service and the front end application but the whole data cycle from exporting the Zonza application data to an Azure SQL Database through to calling the Python REST functions in customer and admin cases.
 
-![Final Architecture of Solution](/images/2016-12-14-Hogarth-Zonza-PBIE/architecture_hogarth_pbie.PNG)
+__Customer Architecture__
+![Final Customer Architecture of Solution](/images/2016-12-14-Hogarth-Zonza-PBIE/architecture_hogarth_pbie.PNG)
 
+__Admin Architecture__
+![Final Admin Architecture of Solution](/images/2016-12-14-Hogarth-Zonza-PBIE/admin_experience.PNG)
+
+
+__Architecture in Progress during the hack__
 ![A working architecture and progress during the hackathon](/images/2016-12-14-Hogarth-Zonza-PBIE/working1.png)
 
 __Customer Journey through Architecture:__
